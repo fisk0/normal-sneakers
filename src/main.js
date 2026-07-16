@@ -115,12 +115,15 @@ animate ("div.loader", {
     y: "-100%"
 }, {duration : 1, delay : 1}, )
  }, (xhr) => {
-    const p = Math.round((xhr.loaded / xhr.total) * 100);
-    loaderTag.querySelector("span").innerHTML = p + '%';
+    if (xhr.total > 0) {
+        const p = Math.round((xhr.loaded / xhr.total) * 100);
+        loaderTag.querySelector("span").innerHTML = p + '%';
+    } else {
+        loaderTag.querySelector("span").innerHTML = 'loading...';
+    }
 }, (error) => {
-    console.error(error)
-}
-);
+    console.error(error);
+});
  
 
 
